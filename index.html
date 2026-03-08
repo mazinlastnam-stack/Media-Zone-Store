@@ -9,7 +9,7 @@
     <!-- Google Fonts: تحسين الخطوط -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        /* متغيرات الألوان */
+        /* جميع الأنماط كما هي بدون تغيير (نفس الأنماط السابقة) */
         :root {
             --primary: #ff0000;
             --primary-dark: #cc0000;
@@ -453,7 +453,7 @@
             transition: var(--transition);
             box-shadow: var(--shadow);
             position: relative;
-            display: none;
+            display: none; /* يظهر فقط عندما يكون له class visible */
         }
 
         .product-card.visible {
@@ -1243,83 +1243,11 @@
         </div>
     </section>
 
-    <!-- منتجات مميزة -->
+    <!-- منتجات مميزة (سيتم تعبئتها ديناميكياً) -->
     <h2 class="section-title" id="products"><span>منتجات مميزة</span></h2>
     <section class="featured-products">
         <div class="products-grid" id="productsGrid">
-            <!-- نموذج منتج 1 -->
-            <div class="product-card" data-category="accessories" data-name="سماعة جوهرة AM5">
-                <span class="product-badge">وصل حديثاً</span>
-                <div class="product-img"><i class="fas fa-headphones"></i></div>
-                <div class="product-info">
-                    <h4>سماعة جوهرة AM5</h4>
-                    <div class="price">$45.00 <span class="old-price">$60.00</span></div>
-                    <div class="product-actions">
-                        <button class="add-to-cart" onclick="addToCart('سماعة جوهرة AM5', 45, this)"><i class="fas fa-cart-plus"></i> أضف</button>
-                        <button class="quick-view" onclick="quickView('سماعة جوهرة AM5', 45, 'accessories')"><i class="fas fa-eye"></i></button>
-                    </div>
-                </div>
-            </div>
-            <!-- منتج 2 -->
-            <div class="product-card" data-category="games" data-name="لعبة Gran Turismo 7">
-                <div class="product-img"><i class="fas fa-gamepad"></i></div>
-                <div class="product-info">
-                    <h4>لعبة Gran Turismo 7 (PS5)</h4>
-                    <div class="price">$70.00</div>
-                    <div class="product-actions">
-                        <button class="add-to-cart" onclick="addToCart('Gran Turismo 7', 70, this)"><i class="fas fa-cart-plus"></i> أضف</button>
-                        <button class="quick-view" onclick="quickView('Gran Turismo 7', 70, 'games')"><i class="fas fa-eye"></i></button>
-                    </div>
-                </div>
-            </div>
-            <!-- منتج 3 -->
-            <div class="product-card" data-category="subscriptions" data-name="نتفلكس 4 شاشات">
-                <div class="product-img"><i class="fas fa-tv"></i></div>
-                <div class="product-info">
-                    <h4>اشتراك نتفلكس 4 شاشات</h4>
-                    <div class="price">$15.99 <span class="old-price">$25.00</span></div>
-                    <div class="product-actions">
-                        <button class="add-to-cart" onclick="addToCart('نتفلكس 4 شاشات', 15.99, this)"><i class="fas fa-cart-plus"></i> أضف</button>
-                        <button class="quick-view" onclick="quickView('نتفلكس 4 شاشات', 15.99, 'subscriptions')"><i class="fas fa-eye"></i></button>
-                    </div>
-                </div>
-            </div>
-            <!-- منتج 4 -->
-            <div class="product-card" data-category="movies" data-name="فيلم Dune 2">
-                <div class="product-img"><i class="fas fa-film"></i></div>
-                <div class="product-info">
-                    <h4>فيلم Dune: Part Two (4K)</h4>
-                    <div class="price">$9.99</div>
-                    <div class="product-actions">
-                        <button class="add-to-cart" onclick="addToCart('Dune 2', 9.99, this)"><i class="fas fa-cart-plus"></i> أضف</button>
-                        <button class="quick-view" onclick="quickView('Dune 2', 9.99, 'movies')"><i class="fas fa-eye"></i></button>
-                    </div>
-                </div>
-            </div>
-            <!-- منتج 5 -->
-            <div class="product-card" data-category="anime" data-name="ون بيس قميص">
-                <div class="product-img"><i class="fas fa-tshirt"></i></div>
-                <div class="product-info">
-                    <h4>تيشيرت ون بيس</h4>
-                    <div class="price">$22.00</div>
-                    <div class="product-actions">
-                        <button class="add-to-cart" onclick="addToCart('تيشيرت ون بيس', 22, this)"><i class="fas fa-cart-plus"></i> أضف</button>
-                        <button class="quick-view" onclick="quickView('تيشيرت ون بيس', 22, 'anime')"><i class="fas fa-eye"></i></button>
-                    </div>
-                </div>
-            </div>
-            <!-- منتج 6 -->
-            <div class="product-card" data-category="software" data-name="Adobe Photoshop">
-                <div class="product-img"><i class="fas fa-paint-brush"></i></div>
-                <div class="product-info">
-                    <h4>برنامج Adobe Photoshop CC</h4>
-                    <div class="price">$29.99</div>
-                    <div class="product-actions">
-                        <button class="add-to-cart" onclick="addToCart('Adobe Photoshop', 29.99, this)"><i class="fas fa-cart-plus"></i> أضف</button>
-                        <button class="quick-view" onclick="quickView('Adobe Photoshop', 29.99, 'software')"><i class="fas fa-eye"></i></button>
-                    </div>
-                </div>
-            </div>
+            <!-- هنا سيتم إدراج المنتجات عبر JavaScript -->
         </div>
     </section>
 
@@ -1471,13 +1399,15 @@
     <!-- رسالة تأكيد -->
     <div class="toast" id="toast">تمت الإضافة إلى السلة</div>
 
-    <!-- JavaScript -->
+    <!-- JavaScript المعدل بالكامل للربط مع لوحة التحكم -->
     <script>
-        // ==================== إعدادات تيلجرام ====================
-        const TELEGRAM_TOKEN = '7963817662:AAEzdlPpa78KtKOtEtYYQZ8s8eZwu8toH-I'; // توكن البوت
-        const CHAT_ID = '8496525619'; // ضع هنا معرف الدردشة الخاص بك (يمكن الحصول عليه من @userinfobot)
+        // ==================== إعدادات تيلجرام (تقرأ من localStorage) ====================
+        let TELEGRAM_TOKEN = localStorage.getItem('telegram_token') || '7963817662:AAEzdlPpa78KtKOtEtYYQZ8s8eZwu8toH-I';
+        let CHAT_ID = localStorage.getItem('telegram_chat_id') || '8496525619';
 
-        // ==================== الحالة العامة ====================
+        // ==================== البيانات العامة ====================
+        let categories = [];
+        let products = [];
         let cart = JSON.parse(localStorage.getItem('cart')) || [];
         let currentProduct = {};
 
@@ -1496,28 +1426,86 @@
         const cartItemsDiv = document.getElementById('cartItems');
         const cartTotalSpan = document.getElementById('cartTotal');
         const modal = document.getElementById('quickViewModal');
-        const categoriesSection = document.getElementById('categoriesSection');
         const checkoutModal = document.getElementById('checkoutModal');
         const navLinks = document.querySelectorAll('.nav-links a, .mobile-menu ul li a, .footer-col ul li a[data-category]');
 
-        // ========== تهيئة عرض المنتجات حسب القسم ==========
-        function filterProducts(category) {
-            const products = document.querySelectorAll('.product-card');
-            products.forEach(product => {
-                if (category === 'all' || product.dataset.category === category) {
-                    product.classList.add('visible');
-                } else {
-                    product.classList.remove('visible');
-                }
-            });
-
-            // إظهار/إخفاء أقسام الكارت (categories)
-            if (category === 'all') {
-                categoriesSection.classList.add('active');
+        // ========== تحميل البيانات من localStorage (منتجات وأقسام) ==========
+        function loadDataFromStorage() {
+            // تحميل الأقسام
+            const storedCategories = localStorage.getItem('mediazone_categories');
+            if (storedCategories) {
+                categories = JSON.parse(storedCategories);
             } else {
-                categoriesSection.classList.remove('active');
+                // بيانات افتراضية متوافقة مع admin.html
+                categories = [
+                    { id: 1, name: 'anime', desc: 'أحدث المسلسلات العربية والأجنبية والأنمي الحصري', icon: 'fas fa-tv' },
+                    { id: 2, name: 'movies', desc: 'أفلام أجنبية وعربية بجودة عالية', icon: 'fas fa-film' },
+                    { id: 3, name: 'accessories', desc: 'سماعات، شواحن، كيابل، وملحقات الألعاب', icon: 'fas fa-headphones' },
+                    { id: 4, name: 'subscriptions', desc: 'اشتراكات نتفلكس، شاهد، كورسات تعليمية', icon: 'fas fa-gem' },
+                    { id: 5, name: 'software', desc: 'برامج كمبيوتر، تطبيقات مهكرة، وأدوات احترافية', icon: 'fas fa-laptop-code' },
+                    { id: 6, name: 'games', desc: 'ألعاب PS4, PS5، وشحن رصيد', icon: 'fas fa-gamepad' },
+                    { id: 7, name: 'design', desc: 'خدمات برمجية، تصميم مواقع، وأنظمة إدارة', icon: 'fas fa-paint-brush' }
+                ];
             }
 
+            // تحميل المنتجات
+            const storedProducts = localStorage.getItem('mediazone_products');
+            if (storedProducts) {
+                products = JSON.parse(storedProducts);
+            } else {
+                // بيانات افتراضية
+                products = [
+                    { id: 1, name: 'سماعة جوهرة AM5', price: 45, oldPrice: 60, category: 'accessories', desc: 'منتج من قسم accessories بجودة عالية.', icon: 'fas fa-headphones', badge: 'وصل حديثاً' },
+                    { id: 2, name: 'Gran Turismo 7', price: 70, oldPrice: 0, category: 'games', desc: 'منتج من قسم games بجودة عالية.', icon: 'fas fa-gamepad', badge: '' },
+                    { id: 3, name: 'نتفلكس 4 شاشات', price: 15.99, oldPrice: 25, category: 'subscriptions', desc: 'منتج من قسم subscriptions بجودة عالية.', icon: 'fas fa-tv', badge: '' },
+                    { id: 4, name: 'Dune 2', price: 9.99, oldPrice: 0, category: 'movies', desc: 'منتج من قسم movies بجودة عالية.', icon: 'fas fa-film', badge: '' },
+                    { id: 5, name: 'تيشيرت ون بيس', price: 22, oldPrice: 0, category: 'anime', desc: 'منتج من قسم anime بجودة عالية.', icon: 'fas fa-tshirt', badge: '' },
+                    { id: 6, name: 'Adobe Photoshop', price: 29.99, oldPrice: 0, category: 'software', desc: 'منتج من قسم software بجودة عالية.', icon: 'fas fa-paint-brush', badge: '' }
+                ];
+            }
+
+            // تحديث إعدادات تليجرام إذا تغيرت في localStorage
+            TELEGRAM_TOKEN = localStorage.getItem('telegram_token') || TELEGRAM_TOKEN;
+            CHAT_ID = localStorage.getItem('telegram_chat_id') || CHAT_ID;
+        }
+
+        // ========== حفظ السلة ==========
+        function saveCart() {
+            localStorage.setItem('cart', JSON.stringify(cart));
+        }
+
+        // ========== عرض المنتجات في الصفحة ==========
+        function renderProducts(filterCategory = 'all', searchTerm = '') {
+            let html = '';
+            products.forEach(p => {
+                // تطبيق البحث
+                if (searchTerm && !p.name.toLowerCase().includes(searchTerm.toLowerCase())) return;
+                // تطبيق فلتر القسم
+                if (filterCategory !== 'all' && p.category !== filterCategory) return;
+
+                const oldPriceHtml = p.oldPrice ? `<span class="old-price">$${p.oldPrice.toFixed(2)}</span>` : '';
+                const badgeHtml = p.badge ? `<span class="product-badge">${p.badge}</span>` : '';
+                html += `
+                    <div class="product-card visible" data-category="${p.category}" data-name="${p.name}">
+                        ${badgeHtml}
+                        <div class="product-img"><i class="${p.icon || 'fas fa-box'}"></i></div>
+                        <div class="product-info">
+                            <h4>${p.name}</h4>
+                            <div class="price">$${p.price.toFixed(2)} ${oldPriceHtml}</div>
+                            <div class="product-actions">
+                                <button class="add-to-cart" onclick="addToCart('${p.name.replace(/'/g, "\\'")}', ${p.price}, this)"><i class="fas fa-cart-plus"></i> أضف</button>
+                                <button class="quick-view" onclick="quickView('${p.name.replace(/'/g, "\\'")}', ${p.price}, '${p.category}', '${p.desc || ''}', '${p.icon || 'fas fa-box'}')"><i class="fas fa-eye"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            productsGrid.innerHTML = html || '<p style="text-align:center; color:#777;">لا توجد منتجات في هذا القسم</p>';
+        }
+
+        // ========== تصفية المنتجات حسب القسم ==========
+        function filterProducts(category) {
+            renderProducts(category, searchInput.value);
             // تحديث الرابط النشط
             navLinks.forEach(link => {
                 link.classList.remove('active');
@@ -1527,7 +1515,13 @@
             });
         }
 
-        // الاستماع للنقر على روابط التنقل
+        // ========== البحث المباشر ==========
+        searchInput.addEventListener('input', function() {
+            const activeCategory = document.querySelector('.nav-links a.active')?.dataset.category || 'all';
+            renderProducts(activeCategory, this.value);
+        });
+
+        // ========== مستمع لروابط التنقل ==========
         navLinks.forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
@@ -1538,7 +1532,7 @@
             });
         });
 
-        // ========== سلايدر الهيرو ==========
+        // ========== سلايدر الهيرو (كما هو) ==========
         let slideIndex = 0;
         const slides = document.querySelectorAll('.slide');
         const dots = document.querySelectorAll('.dot');
@@ -1563,24 +1557,13 @@
         setInterval(nextSlide, 5000);
 
         // ========== القائمة الجانبية ==========
-        menuIcon.addEventListener('click', () => {
-            mobileMenu.classList.add('active');
-        });
-
-        closeMenu.addEventListener('click', () => {
-            mobileMenu.classList.remove('active');
-        });
+        menuIcon.addEventListener('click', () => mobileMenu.classList.add('active'));
+        closeMenu.addEventListener('click', () => mobileMenu.classList.remove('active'));
 
         // ========== عربة التسوق ==========
-        cartIcon.addEventListener('click', () => {
-            cartSidebar.classList.add('active');
-        });
+        cartIcon.addEventListener('click', () => cartSidebar.classList.add('active'));
+        closeCart.addEventListener('click', () => cartSidebar.classList.remove('active'));
 
-        closeCart.addEventListener('click', () => {
-            cartSidebar.classList.remove('active');
-        });
-
-        // إضافة منتج إلى السلة
         function addToCart(name, price, btnElement) {
             const existing = cart.find(item => item.name === name);
             if (existing) {
@@ -1591,36 +1574,26 @@
             updateCart();
             saveCart();
             showToast(`تمت إضافة ${name} إلى السلة`, 'success');
-            // تأثير على الزر
             btnElement.innerHTML = '<i class="fas fa-check"></i> تم';
             setTimeout(() => {
                 btnElement.innerHTML = '<i class="fas fa-cart-plus"></i> أضف';
             }, 1000);
         }
 
-        // إضافة من المودال
-        function addFromModal() {
-            const qty = parseInt(document.getElementById('modalQty').value);
-            const name = currentProduct.name;
-            const price = currentProduct.price;
-            const existing = cart.find(item => item.name === name);
-            if (existing) {
-                existing.qty += qty;
-            } else {
-                cart.push({ name, price, qty });
-            }
+        function removeFromCart(index) {
+            cart.splice(index, 1);
             updateCart();
             saveCart();
-            showToast(`تمت إضافة ${name} إلى السلة`, 'success');
-            closeModal();
+            showToast('تم حذف المنتج من السلة', 'warning');
         }
 
-        // حفظ السلة
-        function saveCart() {
-            localStorage.setItem('cart', JSON.stringify(cart));
+        function clearCart() {
+            cart = [];
+            updateCart();
+            saveCart();
+            showToast('تم تفريغ السلة', 'warning');
         }
 
-        // تحديث واجهة السلة
         function updateCart() {
             const totalItems = cart.reduce((acc, item) => acc + item.qty, 0);
             cartCountSpan.textContent = totalItems;
@@ -1650,23 +1623,38 @@
             cartTotalSpan.textContent = `$${total.toFixed(2)}`;
         }
 
-        // إزالة من السلة
-        function removeFromCart(index) {
-            cart.splice(index, 1);
-            updateCart();
-            saveCart();
-            showToast('تم حذف المنتج من السلة', 'warning');
+        // ========== العرض السريع ==========
+        function quickView(name, price, category, desc, icon) {
+            currentProduct = { name, price, category, desc, icon };
+            document.getElementById('modalTitle').textContent = name;
+            document.getElementById('modalPrice').textContent = `$${price.toFixed(2)}`;
+            document.getElementById('modalDesc').textContent = desc || `منتج من قسم ${category} بجودة عالية.`;
+            document.getElementById('modalQty').value = 1;
+            document.getElementById('modalImg').innerHTML = `<i class="${icon}"></i>`;
+            modal.classList.add('active');
         }
 
-        // تفريغ السلة
-        function clearCart() {
-            cart = [];
-            updateCart();
-            saveCart();
-            showToast('تم تفريغ السلة', 'warning');
+        function closeModal() {
+            modal.classList.remove('active');
         }
 
-        // فتح مودال تأكيد الطلب
+        function addFromModal() {
+            const qty = parseInt(document.getElementById('modalQty').value);
+            const name = currentProduct.name;
+            const price = currentProduct.price;
+            const existing = cart.find(item => item.name === name);
+            if (existing) {
+                existing.qty += qty;
+            } else {
+                cart.push({ name, price, qty });
+            }
+            updateCart();
+            saveCart();
+            showToast(`تمت إضافة ${name} إلى السلة`, 'success');
+            closeModal();
+        }
+
+        // ========== مودال الطلب ==========
         function openCheckoutModal() {
             if (cart.length === 0) {
                 showToast('السلة فارغة!', 'error');
@@ -1675,7 +1663,6 @@
             checkoutModal.classList.add('active');
         }
 
-        // إغلاق مودال تأكيد الطلب
         function closeCheckoutModal() {
             checkoutModal.classList.remove('active');
             document.getElementById('customerName').value = '';
@@ -1684,7 +1671,6 @@
             document.getElementById('orderStatus').innerHTML = '';
         }
 
-        // إرسال الطلب إلى تيلجرام
         async function submitOrder() {
             const name = document.getElementById('customerName').value.trim();
             const phone = document.getElementById('customerPhone').value.trim();
@@ -1695,7 +1681,6 @@
                 return;
             }
 
-            // تجهيز نص الرسالة
             let message = `🛒 *طلب جديد من ميديا زون*\n\n`;
             message += `👤 *الاسم:* ${name}\n`;
             message += `📞 *الهاتف:* ${phone}\n`;
@@ -1707,7 +1692,6 @@
             const total = cart.reduce((acc, item) => acc + (item.price * item.qty), 0);
             message += `\n💰 *الإجمالي:* $${total.toFixed(2)}`;
 
-            // إظهار حالة الإرسال
             const statusDiv = document.getElementById('orderStatus');
             statusDiv.innerHTML = '<span class="loading"></span> جاري الإرسال...';
             const submitBtn = document.getElementById('submitOrderBtn');
@@ -1717,9 +1701,7 @@
                 const url = `https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage`;
                 const response = await fetch(url, {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
                         chat_id: CHAT_ID,
                         text: message,
@@ -1731,88 +1713,20 @@
                 if (data.ok) {
                     statusDiv.innerHTML = '✅ تم إرسال الطلب بنجاح!';
                     showToast('تم إرسال طلبك إلى تليجرام', 'success');
-                    // تفريغ السلة بعد الإرسال
                     cart = [];
                     updateCart();
                     saveCart();
-                    setTimeout(() => {
-                        closeCheckoutModal();
-                    }, 2000);
+                    setTimeout(() => closeCheckoutModal(), 2000);
                 } else {
                     statusDiv.innerHTML = '❌ فشل الإرسال: ' + data.description;
                     showToast('فشل الإرسال، حاول مرة أخرى', 'error');
                 }
             } catch (error) {
-                console.error(error);
                 statusDiv.innerHTML = '❌ حدث خطأ في الاتصال';
                 showToast('خطأ في الاتصال', 'error');
             } finally {
                 submitBtn.disabled = false;
             }
-        }
-
-        // ========== العرض السريع ==========
-        function quickView(name, price, category) {
-            currentProduct = { name, price, category };
-            document.getElementById('modalTitle').textContent = name;
-            document.getElementById('modalPrice').textContent = `$${price.toFixed(2)}`;
-            document.getElementById('modalDesc').textContent = `منتج من قسم ${category} بجودة عالية.`;
-            document.getElementById('modalQty').value = 1;
-            modal.classList.add('active');
-        }
-
-        function closeModal() {
-            modal.classList.remove('active');
-        }
-
-        window.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                closeModal();
-            }
-            if (e.target === checkoutModal) {
-                closeCheckoutModal();
-            }
-        });
-
-        // ========== البحث المباشر ==========
-        searchInput.addEventListener('input', function() {
-            const term = this.value.toLowerCase();
-            const products = document.querySelectorAll('.product-card');
-            products.forEach(product => {
-                const name = product.getAttribute('data-name') || product.querySelector('h4').textContent.toLowerCase();
-                if (name.includes(term) || term === '') {
-                    product.classList.add('visible');
-                } else {
-                    product.classList.remove('visible');
-                }
-            });
-        });
-
-        // ========== تصفية حسب القسم (عند النقر على بطاقات الأقسام) ==========
-        document.querySelectorAll('.card').forEach(card => {
-            card.addEventListener('click', () => {
-                const category = card.dataset.category;
-                filterProducts(category);
-            });
-        });
-
-        // ========== زر العودة للأعلى ==========
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 300) {
-                backToTop.classList.add('show');
-            } else {
-                backToTop.classList.remove('show');
-            }
-        });
-
-        // ========== رسالة تأكيد ==========
-        function showToast(msg, type = 'success') {
-            toast.textContent = msg;
-            toast.style.background = type === 'success' ? 'var(--primary)' : (type === 'error' ? '#f44336' : '#ff9800');
-            toast.classList.add('show');
-            setTimeout(() => {
-                toast.classList.remove('show');
-            }, 2000);
         }
 
         // ========== النشرة البريدية ==========
@@ -1825,6 +1739,20 @@
                 showToast('الرجاء إدخال البريد الإلكتروني', 'error');
             }
         }
+
+        // ========== رسالة توست ==========
+        function showToast(msg, type = 'success') {
+            toast.textContent = msg;
+            toast.style.background = type === 'success' ? 'var(--primary)' : (type === 'error' ? '#f44336' : '#ff9800');
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2000);
+        }
+
+        // ========== زر العودة للأعلى ==========
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) backToTop.classList.add('show');
+            else backToTop.classList.remove('show');
+        });
 
         // ========== إغلاق القوائم عند النقر خارجها ==========
         document.addEventListener('click', (e) => {
@@ -1839,14 +1767,23 @@
         cartSidebar.addEventListener('click', (e) => e.stopPropagation());
         mobileMenu.addEventListener('click', (e) => e.stopPropagation());
 
-        // تهيئة
-        filterProducts('all');
+        // ========== الاستماع لتغييرات localStorage (من admin.html) ==========
+        window.addEventListener('storage', (e) => {
+            if (e.key === 'mediazone_products' || e.key === 'mediazone_categories' || e.key === 'telegram_token' || e.key === 'telegram_chat_id') {
+                loadDataFromStorage();
+                const activeCategory = document.querySelector('.nav-links a.active')?.dataset.category || 'all';
+                renderProducts(activeCategory, searchInput.value);
+            }
+        });
+
+        // ========== التهيئة ==========
+        loadDataFromStorage();
+        renderProducts('all', '');
         updateCart();
 
+        // تفعيل رابط الرئيسية
         navLinks.forEach(link => {
-            if (link.dataset.category === 'all') {
-                link.classList.add('active');
-            }
+            if (link.dataset.category === 'all') link.classList.add('active');
         });
     </script>
 </body>
