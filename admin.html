@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ميديا زون | لوحة التحكم</title>
+    <title>لمسة شبابية | لوحة التحكم</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        /* الأنماط كما هي دون تغيير - نفس الأنماط السابقة */
+        /* الهوية الذهبية والسوداء */
         :root {
-            --primary: #ff0000;
-            --primary-dark: #cc0000;
-            --bg-dark: #121212;
-            --bg-card: #1a1a1a;
+            --primary: #D4AF37;
+            --primary-dark: #b88c2e;
+            --bg-dark: #0a0a0a;
+            --bg-card: #111111;
             --text-light: #fff;
             --text-muted: #aaa;
             --border: #333;
@@ -50,6 +50,7 @@
         }
         .tab-btn.active, .tab-btn:hover {
             background: var(--primary);
+            color: #000;
         }
         .tab-content { display: none; }
         .tab-content.active { display: block; }
@@ -68,7 +69,7 @@
             margin-bottom: 30px;
         }
         .stat-card {
-            background: #252525;
+            background: #1a1a1a;
             padding: 20px;
             border-radius: 8px;
             text-align: center;
@@ -77,7 +78,7 @@
         .stat-card h3 { font-size: 28px; color: var(--primary); }
         .btn {
             background: var(--primary);
-            color: #fff;
+            color: #000;
             border: none;
             padding: 8px 16px;
             border-radius: 5px;
@@ -94,8 +95,8 @@
             border: 1px solid var(--primary);
             color: var(--primary);
         }
-        .btn-outline:hover { background: var(--primary); color: #fff; }
-        .btn-danger { background: #dc3545; }
+        .btn-outline:hover { background: var(--primary); color: #000; }
+        .btn-danger { background: #dc3545; color: #fff; }
         .btn-danger:hover { background: #bb2d3b; }
         table {
             width: 100%;
@@ -109,7 +110,7 @@
             text-align: center;
             border-bottom: 1px solid #333;
         }
-        th { background: var(--primary); color: #fff; }
+        th { background: var(--primary); color: #000; }
         .form-group { margin-bottom: 15px; }
         .form-group label { display: block; margin-bottom: 5px; }
         .form-control {
@@ -143,7 +144,7 @@
             position: fixed;
             bottom: 20px; left: 20px;
             background: var(--primary);
-            color: #fff;
+            color: #000;
             padding: 12px 20px;
             border-radius: 5px;
             transform: translateY(100px);
@@ -172,7 +173,7 @@
 </head>
 <body>
     <div class="navbar">
-        <div class="logo"><i class="fas fa-bullseye"></i> MEDIA ZONE | لوحة التحكم</div>
+        <div class="logo"><i class="fas fa-hanger"></i> لَمْسَة شَبَابِيَّة | لوحة التحكم</div>
         <a href="index.html" target="_blank" class="btn btn-outline"><i class="fas fa-store"></i> عرض المتجر</a>
     </div>
     <div class="container">
@@ -180,7 +181,7 @@
         <div class="tabs">
             <button class="tab-btn active" onclick="switchTab('dashboard')"><i class="fas fa-chart-pie"></i> لوحة المعلومات</button>
             <button class="tab-btn" onclick="switchTab('categories')"><i class="fas fa-list"></i> الأقسام</button>
-            <button class="tab-btn" onclick="switchTab('products')"><i class="fas fa-box"></i> المنتجات</button>
+            <button class="tab-btn" onclick="switchTab('products')"><i class="fas fa-tshirt"></i> المنتجات</button>
             <button class="tab-btn" onclick="switchTab('orders')"><i class="fas fa-truck"></i> الطلبات</button>
             <button class="tab-btn" onclick="switchTab('settings')"><i class="fas fa-cog"></i> الإعدادات</button>
         </div>
@@ -204,8 +205,8 @@
             <div class="card">
                 <h3><i class="fas fa-plus-circle"></i> إضافة قسم جديد</h3>
                 <div class="form-group">
-                    <label>اسم القسم (بالإنجليزية، مثل: anime, movies, accessories ...)</label>
-                    <input type="text" id="newCategoryName" class="form-control" placeholder="مثال: anime">
+                    <label>اسم القسم (بالإنجليزية، مثل: men, women, accessories)</label>
+                    <input type="text" id="newCategoryName" class="form-control" placeholder="مثال: men">
                 </div>
                 <div class="form-group">
                     <label>الوصف (بالعربية)</label>
@@ -213,7 +214,7 @@
                 </div>
                 <div class="form-group">
                     <label>الأيقونة (اسم أيقونة Font Awesome)</label>
-                    <input type="text" id="newCategoryIcon" class="form-control" value="fas fa-tv" placeholder="مثال: fas fa-tv">
+                    <input type="text" id="newCategoryIcon" class="form-control" value="fas fa-tshirt" placeholder="مثال: fas fa-tshirt">
                 </div>
                 <button class="btn" onclick="addCategory()"><i class="fas fa-save"></i> حفظ القسم</button>
             </div>
@@ -229,7 +230,7 @@
             </div>
         </div>
 
-        <!-- إدارة المنتجات -->
+        <!-- إدارة المنتجات (أزياء) -->
         <div id="products" class="tab-content">
             <div class="card">
                 <h3><i class="fas fa-plus-circle"></i> إضافة منتج جديد</h3>
@@ -238,7 +239,7 @@
                     <input type="text" id="newProductName" class="form-control" placeholder="اسم المنتج">
                 </div>
                 <div class="form-group">
-                    <label>السعر ($)</label>
+                    <label>السعر (ريال سعودي)</label>
                     <input type="number" id="newProductPrice" class="form-control" step="0.01" min="0" value="0">
                 </div>
                 <div class="form-group">
@@ -254,12 +255,16 @@
                     <input type="text" id="newProductDesc" class="form-control" value="منتج مميز">
                 </div>
                 <div class="form-group">
-                    <label>الأيقونة</label>
-                    <input type="text" id="newProductIcon" class="form-control" value="fas fa-box">
+                    <label>الأيقونة (للعرض في المتجر)</label>
+                    <input type="text" id="newProductIcon" class="form-control" value="fas fa-tshirt">
                 </div>
                 <div class="form-group">
                     <label>وسم (badge) مثل "وصل حديثاً"</label>
                     <input type="text" id="newProductBadge" class="form-control" placeholder="وصل حديثاً">
+                </div>
+                <div class="form-group">
+                    <label>رابط الصورة (URL)</label>
+                    <input type="text" id="newProductImage" class="form-control" placeholder="https://example.com/image.jpg">
                 </div>
                 <button class="btn" onclick="addProduct()"><i class="fas fa-save"></i> حفظ المنتج</button>
             </div>
@@ -269,7 +274,7 @@
                     <input type="text" id="searchProduct" placeholder="بحث في المنتجات...">
                 </div>
                 <table>
-                    <thead><tr><th>#</th><th>الاسم</th><th>السعر</th><th>القسم</th><th>الإجراءات</th></tr></thead>
+                    <thead><tr><th>#</th><th>الصورة</th><th>الاسم</th><th>السعر</th><th>القسم</th><th>الإجراءات</th></tr></thead>
                     <tbody id="productsTable"></tbody>
                 </table>
             </div>
@@ -304,7 +309,6 @@
                     <input type="text" id="chatId" class="form-control" value="8496525619">
                 </div>
                 <button class="btn" onclick="saveTelegramSettings()">حفظ الإعدادات</button>
-                <p class="text-muted" style="margin-top:10px;">ملاحظة: التوكن الحالي مستخدم في المتجر، يمكنك تغييره هنا.</p>
             </div>
         </div>
     </div>
@@ -335,6 +339,7 @@
             <div class="form-group"><label>الوصف</label><input type="text" id="editProductDesc" class="form-control"></div>
             <div class="form-group"><label>الأيقونة</label><input type="text" id="editProductIcon" class="form-control"></div>
             <div class="form-group"><label>الوسم</label><input type="text" id="editProductBadge" class="form-control"></div>
+            <div class="form-group"><label>رابط الصورة</label><input type="text" id="editProductImage" class="form-control"></div>
             <button class="btn" onclick="saveProductEdit()">حفظ</button>
         </div>
     </div>
@@ -343,34 +348,29 @@
     <div class="toast" id="toast"></div>
 
     <script>
-        // ==================== البيانات الأولية (معدلة لتتوافق مع المتجر) ====================
-        let categories = JSON.parse(localStorage.getItem('mediazone_categories')) || [
-            { id: 1, name: 'anime', desc: 'أحدث المسلسلات العربية والأجنبية والأنمي الحصري', icon: 'fas fa-tv' },
-            { id: 2, name: 'movies', desc: 'أفلام أجنبية وعربية بجودة عالية', icon: 'fas fa-film' },
-            { id: 3, name: 'accessories', desc: 'سماعات، شواحن، كيابل، وملحقات الألعاب', icon: 'fas fa-headphones' },
-            { id: 4, name: 'subscriptions', desc: 'اشتراكات نتفلكس، شاهد، كورسات تعليمية', icon: 'fas fa-gem' },
-            { id: 5, name: 'software', desc: 'برامج كمبيوتر، تطبيقات مهكرة، وأدوات احترافية', icon: 'fas fa-laptop-code' },
-            { id: 6, name: 'games', desc: 'ألعاب PS4, PS5، وشحن رصيد', icon: 'fas fa-gamepad' },
-            { id: 7, name: 'design', desc: 'خدمات برمجية، تصميم مواقع، وأنظمة إدارة', icon: 'fas fa-paint-brush' }
+        // ========== بيانات افتراضية لمتجر أزياء ==========
+        let categories = JSON.parse(localStorage.getItem('lamsa_categories')) || [
+            { id: 1, name: 'men', desc: 'أحدث صيحات الموضة الرجالية', icon: 'fas fa-user-tie' },
+            { id: 2, name: 'women', desc: 'أزياء أنيقة وحصرية للسيدات', icon: 'fas fa-female' },
+            { id: 3, name: 'accessories', desc: 'إكسسوارات راقية تكمل أناقتك', icon: 'fas fa-gem' },
+            { id: 4, name: 'shoes', desc: 'أحذية فاخرة تناسب كل الأذواق', icon: 'fas fa-shoe-prints' },
+            { id: 5, name: 'watches', desc: 'ساعات أنيقة تعكس التميز', icon: 'fas fa-clock' }
         ];
-        let products = JSON.parse(localStorage.getItem('mediazone_products')) || [
-            { id: 1, name: 'سماعة جوهرة AM5', price: 45, oldPrice: 60, category: 'accessories', desc: 'منتج من قسم accessories بجودة عالية.', icon: 'fas fa-headphones', badge: 'وصل حديثاً' },
-            { id: 2, name: 'Gran Turismo 7', price: 70, oldPrice: 0, category: 'games', desc: 'منتج من قسم games بجودة عالية.', icon: 'fas fa-gamepad', badge: '' },
-            { id: 3, name: 'نتفلكس 4 شاشات', price: 15.99, oldPrice: 25, category: 'subscriptions', desc: 'منتج من قسم subscriptions بجودة عالية.', icon: 'fas fa-tv', badge: '' },
-            { id: 4, name: 'Dune 2', price: 9.99, oldPrice: 0, category: 'movies', desc: 'منتج من قسم movies بجودة عالية.', icon: 'fas fa-film', badge: '' },
-            { id: 5, name: 'تيشيرت ون بيس', price: 22, oldPrice: 0, category: 'anime', desc: 'منتج من قسم anime بجودة عالية.', icon: 'fas fa-tshirt', badge: '' },
-            { id: 6, name: 'Adobe Photoshop', price: 29.99, oldPrice: 0, category: 'software', desc: 'منتج من قسم software بجودة عالية.', icon: 'fas fa-paint-brush', badge: '' }
+        let products = JSON.parse(localStorage.getItem('lamsa_products')) || [
+            { id: 1, name: 'بليزر كلاسيك ذهبي', price: 340, oldPrice: 0, category: 'men', desc: 'بليزر بقصة عصرية', icon: 'fas fa-tshirt', badge: 'إصدار محدود', image: 'https://placehold.co/600x800/111111/D4AF37?text=Blazer' },
+            { id: 2, name: 'قميص كاجوال أسود', price: 180, oldPrice: 250, category: 'men', desc: 'قميص قطني مريح', icon: 'fas fa-tshirt', badge: 'الأكثر مبيعاً', image: 'https://placehold.co/600x800/111111/D4AF37?text=Shirt' },
+            { id: 3, name: 'ساعة أنيقة ذهبية', price: 550, oldPrice: 0, category: 'watches', desc: 'ساعة كرونوغراف', icon: 'fas fa-clock', badge: 'تميز', image: 'https://placehold.co/600x800/111111/D4AF37?text=Watch' },
+            { id: 4, name: 'حذاء جلد فاخر', price: 420, oldPrice: 600, category: 'shoes', desc: 'حذاء رسمي', icon: 'fas fa-shoe-prints', badge: 'جودة عالية', image: 'https://placehold.co/600x800/111111/D4AF37?text=Shoes' },
+            { id: 5, name: 'حقيبة يد أنيقة', price: 290, oldPrice: 0, category: 'women', desc: 'حقيبة جلدية', icon: 'fas fa-bag-shopping', badge: '', image: 'https://placehold.co/600x800/111111/D4AF37?text=Bag' }
         ];
-        let orders = JSON.parse(localStorage.getItem('mediazone_orders')) || [];
+        let orders = JSON.parse(localStorage.getItem('lamsa_orders')) || [];
 
         // إعدادات تليجرام
         let telegramToken = localStorage.getItem('telegram_token') || '7963817662:AAEzdlPpa78KtKOtEtYYQZ8s8eZwu8toH-I';
         let telegramChatId = localStorage.getItem('telegram_chat_id') || '8496525619';
 
-        // عناصر
         const toast = document.getElementById('toast');
 
-        // تهيئة
         function init() {
             updateStats();
             renderCategories();
@@ -382,12 +382,10 @@
             document.getElementById('chatId').value = telegramChatId;
         }
 
-        // حفظ البيانات
-        function saveCategories() { localStorage.setItem('mediazone_categories', JSON.stringify(categories)); }
-        function saveProducts() { localStorage.setItem('mediazone_products', JSON.stringify(products)); }
-        function saveOrders() { localStorage.setItem('mediazone_orders', JSON.stringify(orders)); }
+        function saveCategories() { localStorage.setItem('lamsa_categories', JSON.stringify(categories)); }
+        function saveProducts() { localStorage.setItem('lamsa_products', JSON.stringify(products)); }
+        function saveOrders() { localStorage.setItem('lamsa_orders', JSON.stringify(orders)); }
 
-        // التبويبات
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -395,14 +393,13 @@
             event.target.classList.add('active');
         }
 
-        // الإحصائيات
         function updateStats() {
             document.getElementById('statCategories').textContent = categories.length;
             document.getElementById('statProducts').textContent = products.length;
             document.getElementById('statOrders').textContent = orders.length;
         }
 
-        // عرض الأقسام
+        // الأقسام
         function renderCategories(filter = '') {
             const tbody = document.getElementById('categoriesTable');
             let html = '';
@@ -421,7 +418,6 @@
             tbody.innerHTML = html;
         }
 
-        // إضافة قسم
         function addCategory() {
             const name = document.getElementById('newCategoryName').value.trim();
             const desc = document.getElementById('newCategoryDesc').value.trim();
@@ -435,26 +431,21 @@
             updateStats();
             document.getElementById('newCategoryName').value = '';
             document.getElementById('newCategoryDesc').value = '';
-            document.getElementById('newCategoryIcon').value = 'fas fa-tv';
+            document.getElementById('newCategoryIcon').value = 'fas fa-tshirt';
             showToast('تمت إضافة القسم بنجاح');
         }
 
-        // حذف قسم
         function deleteCategory(id) {
             if (!confirm('هل أنت متأكد من حذف هذا القسم؟')) return;
             categories = categories.filter(c => c.id !== id);
-            // حذف المنتجات المرتبطة بهذا القسم (اختياري)
-            products = products.filter(p => p.category !== categories.find(c => c.id === id)?.name);
+            // لا نحذف المنتجات تلقائياً، يمكن تركتها أو تحديثها لاحقاً
             saveCategories();
-            saveProducts();
             renderCategories();
-            renderProducts();
             populateCategorySelects();
             updateStats();
             showToast('تم الحذف');
         }
 
-        // تعديل قسم
         function editCategory(id) {
             const cat = categories.find(c => c.id === id);
             document.getElementById('editCategoryId').value = cat.id;
@@ -478,7 +469,7 @@
             showToast('تم التحديث');
         }
 
-        // عرض المنتجات
+        // المنتجات
         function renderProducts(filter = '') {
             const tbody = document.getElementById('productsTable');
             let html = '';
@@ -486,8 +477,9 @@
                 const catName = categories.find(c => c.name === p.category)?.name || p.category;
                 html += `<tr>
                     <td>${index+1}</td>
+                    <td><img src="${p.image || 'https://placehold.co/60x60/111111/D4AF37?text=No+Img'}" style="width:50px; height:50px; object-fit:cover; border-radius:8px;"></td>
                     <td>${p.name}</td>
-                    <td>$${p.price} ${p.oldPrice ? `<del>$${p.oldPrice}</del>` : ''}</td>
+                    <td>${p.price} ر.س ${p.oldPrice ? `<del>${p.oldPrice} ر.س</del>` : ''}</td>
                     <td>${catName}</td>
                     <td>
                         <button class="btn btn-sm" onclick="editProduct(${p.id})"><i class="fas fa-edit"></i></button>
@@ -498,18 +490,18 @@
             tbody.innerHTML = html;
         }
 
-        // إضافة منتج
         function addProduct() {
             const name = document.getElementById('newProductName').value.trim();
             const price = parseFloat(document.getElementById('newProductPrice').value);
             const oldPrice = parseFloat(document.getElementById('newProductOldPrice').value) || 0;
             const category = document.getElementById('newProductCategory').value;
             const desc = document.getElementById('newProductDesc').value.trim() || 'منتج مميز';
-            const icon = document.getElementById('newProductIcon').value.trim() || 'fas fa-box';
+            const icon = document.getElementById('newProductIcon').value.trim() || 'fas fa-tshirt';
             const badge = document.getElementById('newProductBadge').value.trim();
+            const image = document.getElementById('newProductImage').value.trim();
             if (!name || isNaN(price)) { showToast('الرجاء إدخال اسم المنتج وسعر صحيح', 'error'); return; }
             const newId = products.length ? Math.max(...products.map(p => p.id)) + 1 : 1;
-            products.push({ id: newId, name, price, oldPrice, category, desc, icon, badge });
+            products.push({ id: newId, name, price, oldPrice, category, desc, icon, badge, image });
             saveProducts();
             renderProducts();
             updateStats();
@@ -517,12 +509,12 @@
             document.getElementById('newProductPrice').value = '0';
             document.getElementById('newProductOldPrice').value = '0';
             document.getElementById('newProductDesc').value = 'منتج مميز';
-            document.getElementById('newProductIcon').value = 'fas fa-box';
+            document.getElementById('newProductIcon').value = 'fas fa-tshirt';
             document.getElementById('newProductBadge').value = '';
+            document.getElementById('newProductImage').value = '';
             showToast('تمت إضافة المنتج');
         }
 
-        // حذف منتج
         function deleteProduct(id) {
             if (!confirm('حذف المنتج؟')) return;
             products = products.filter(p => p.id !== id);
@@ -532,7 +524,6 @@
             showToast('تم الحذف');
         }
 
-        // تعديل منتج
         function editProduct(id) {
             const p = products.find(p => p.id === id);
             document.getElementById('editProductId').value = p.id;
@@ -542,7 +533,7 @@
             document.getElementById('editProductDesc').value = p.desc;
             document.getElementById('editProductIcon').value = p.icon;
             document.getElementById('editProductBadge').value = p.badge || '';
-            // تعبئة قائمة الأقسام في المودال
+            document.getElementById('editProductImage').value = p.image || '';
             const catSelect = document.getElementById('editProductCategory');
             catSelect.innerHTML = '';
             categories.forEach(c => {
@@ -563,16 +554,16 @@
             const desc = document.getElementById('editProductDesc').value.trim();
             const icon = document.getElementById('editProductIcon').value.trim();
             const badge = document.getElementById('editProductBadge').value.trim();
+            const image = document.getElementById('editProductImage').value.trim();
             if (!name || isNaN(price)) { showToast('بيانات غير صحيحة', 'error'); return; }
             const p = products.find(p => p.id === id);
-            p.name = name; p.price = price; p.oldPrice = oldPrice; p.category = category; p.desc = desc; p.icon = icon; p.badge = badge;
+            p.name = name; p.price = price; p.oldPrice = oldPrice; p.category = category; p.desc = desc; p.icon = icon; p.badge = badge; p.image = image;
             saveProducts();
             renderProducts();
             closeModal('editProductModal');
             showToast('تم التحديث');
         }
 
-        // تعبئة قائمة الأقسام في الإضافة
         function populateCategorySelects() {
             const select = document.getElementById('newProductCategory');
             select.innerHTML = '';
@@ -584,7 +575,7 @@
             });
         }
 
-        // عرض الطلبات
+        // الطلبات
         function renderOrders() {
             const tbody = document.getElementById('ordersTable');
             let html = '';
@@ -594,7 +585,7 @@
                     <td>${order.name}</td>
                     <td>${order.phone}</td>
                     <td>${order.address}</td>
-                    <td>$${order.total}</td>
+                    <td>${order.total} ر.س</td>
                     <td>${new Date(order.date).toLocaleString('ar-EG')}</td>
                     <td><button class="btn btn-sm btn-danger" onclick="deleteOrder(${index})"><i class="fas fa-trash"></i></button></td>
                 </tr>`;
@@ -602,7 +593,6 @@
             tbody.innerHTML = html;
         }
 
-        // حذف طلب
         function deleteOrder(index) {
             if (!confirm('حذف الطلب؟')) return;
             orders.splice(index, 1);
@@ -612,11 +602,9 @@
             showToast('تم الحذف');
         }
 
-        // مودالات
         function openModal(id) { document.getElementById(id).classList.add('active'); }
         function closeModal(id) { document.getElementById(id).classList.remove('active'); }
 
-        // بحث
         document.getElementById('searchCategory').addEventListener('input', function() {
             renderCategories(this.value);
         });
@@ -624,7 +612,6 @@
             renderProducts(this.value);
         });
 
-        // رسالة توست
         function showToast(msg, type = 'success') {
             toast.textContent = msg;
             toast.style.background = type === 'success' ? 'var(--primary)' : (type === 'error' ? '#f44336' : '#ff9800');
@@ -632,7 +619,6 @@
             setTimeout(() => toast.classList.remove('show'), 2000);
         }
 
-        // إعدادات
         function saveTelegramSettings() {
             telegramToken = document.getElementById('botToken').value.trim();
             telegramChatId = document.getElementById('chatId').value.trim();
@@ -641,13 +627,12 @@
             showToast('تم حفظ الإعدادات');
         }
 
-        // تصدير بيانات
         function exportData() {
             const data = { categories, products, orders, telegramToken, telegramChatId };
             const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
-            a.href = url; a.download = 'mediazone_backup.json'; a.click();
+            a.href = url; a.download = 'lamsa_backup.json'; a.click();
         }
 
         function importDataPrompt() {
@@ -676,9 +661,9 @@
 
         function resetData() {
             if (!confirm('سيتم إعادة تعيين جميع البيانات إلى الوضع الافتراضي. هل أنت متأكد؟')) return;
-            localStorage.removeItem('mediazone_categories');
-            localStorage.removeItem('mediazone_products');
-            localStorage.removeItem('mediazone_orders');
+            localStorage.removeItem('lamsa_categories');
+            localStorage.removeItem('lamsa_products');
+            localStorage.removeItem('lamsa_orders');
             localStorage.removeItem('telegram_token');
             localStorage.removeItem('telegram_chat_id');
             location.reload();
