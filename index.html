@@ -88,6 +88,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            background-size: cover;
+            background-position: center;
         }
 
         .product-card .overlay {
@@ -174,7 +176,7 @@
                 <a href="#" class="nav-link">من نحن</a>
             </div>
             <div class="flex items-center space-x-reverse space-x-4">
-                <button onclick="showAdminLogin()" class="trend-gradient btn-main">تسجيل الدخول </button>
+                <button onclick="showAdminLogin()" class="trend-gradient btn-main">تسجيل الدخول</button>
             </div>
         </div>
     </nav>
@@ -220,10 +222,10 @@
         function initData() {
             if (!localStorage.getItem('products')) {
                 const defaultProducts = [
-                    { id: 1, name: 'قميص قطني كلاسيك', price: 250, stock: 45, category: 'رجالي', sales: 120, image: 'قميص كلاسيك' },
-                    { id: 2, name: 'بنطلون جينز عصري', price: 380, stock: 32, category: 'رجالي', sales: 85, image: 'بنطلون جينز' },
-                    { id: 3, name: 'فستان سهرة أنيق', price: 550, stock: 18, category: 'نسائي', sales: 42, image: 'فستان سهرة' },
-                    { id: 4, name: 'حذاء جلدي فاخر', price: 420, stock: 27, category: 'أحذية', sales: 63, image: 'حذاء جلدي' }
+                    { id: 1, name: 'قميص قطني كلاسيك', price: 250, stock: 45, category: 'رجالي', sales: 120, image: 'https://picsum.photos/id/20/300/400' },
+                    { id: 2, name: 'بنطلون جينز عصري', price: 380, stock: 32, category: 'رجالي', sales: 85, image: 'https://picsum.photos/id/26/300/400' },
+                    { id: 3, name: 'فستان سهرة أنيق', price: 550, stock: 18, category: 'نسائي', sales: 42, image: 'https://picsum.photos/id/30/300/400' },
+                    { id: 4, name: 'حذاء جلدي فاخر', price: 420, stock: 27, category: 'أحذية', sales: 63, image: 'https://picsum.photos/id/21/300/400' }
                 ];
                 localStorage.setItem('products', JSON.stringify(defaultProducts));
             }
@@ -252,9 +254,8 @@
             
             container.innerHTML = products.map(product => `
                 <div class="group cursor-pointer">
-                    <div class="product-card">
+                    <div class="product-card" style="background-image: url('${product.image || 'https://picsum.photos/id/1/300/400'}');">
                         <div class="overlay"></div>
-                        <span class="text-gray-300 font-medium italic">${product.image || 'صورة المنتج'}</span>
                         <div class="cart-btn-wrapper">
                             <button class="cart-btn" onclick="addToCart(${product.id})">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -274,6 +275,7 @@
         
         function addToCart(productId) {
             alert('تم إضافة المنتج إلى السلة (نظام تجريبي)');
+            // يمكنك لاحقاً تطبيق خصم من المخزون هنا مع تحديث localStorage وإطلاق حدث
         }
         
         function showAdminLogin() {
@@ -314,6 +316,13 @@
         function closeLoginModal(btn) {
             btn.closest('.modal-overlay').remove();
         }
+        
+        // مزامنة فورية: الاستماع لأي تغيير في localStorage من أي تبويب آخر
+        window.addEventListener('storage', function(event) {
+            if (event.key === 'products') {
+                displayProducts(); // تحديث عرض المنتجات فوراً
+            }
+        });
         
         // Make functions global
         window.showAdminLogin = showAdminLogin;
