@@ -3,537 +3,131 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة تحكم | ترند الأناقة</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --bg-color: #f8fafc;
-            --sidebar-bg: #000000;
-            --primary: #F18F35;
-            --secondary: #EAB308;
-            --text-main: #1e293b;
-            --text-dim: #64748b;
-            --sidebar-width: 240px;
-            --card-bg: #ffffff;
-            --trend-gradient: linear-gradient(135deg, #F18F35 0%, #EAB308 100%);
-            --success: #10b981;
-            --warning: #f59e0b;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Tajawal', sans-serif; }
-
-        body { background: var(--bg-color); color: var(--text-main); }
-
-        .brand-font { font-family: 'Playfair Display', serif; }
-
-        /* Sidebar */
-        .nav-container {
-            position: fixed; top: 0; right: 0; width: var(--sidebar-width);
-            height: 100vh; background: var(--sidebar-bg); border-left: 1px solid #e2e8f0;
-        }
-
-        .logo { padding: 40px 20px; text-align: center; color: white; border-bottom: 1px solid #1e293b; }
-
-        .nav-links { list-style: none; padding: 20px 10px; }
-        .nav-links a {
-            display: flex; align-items: center; padding: 12px 15px; color: #94a3b8;
-            border-radius: 8px; transition: 0.3s; gap: 12px; margin-bottom: 8px; cursor: pointer;
-        }
-        .nav-links a:hover, .nav-links a.active { background: #1a1a1a; color: var(--primary); }
-
-        /* Main Content */
-        main { margin-right: var(--sidebar-width); padding: 40px; }
-
-        .top-bar { margin-bottom: 40px; display: flex; justify-content: space-between; align-items: center; }
-
-        .trend-gradient { background: var(--trend-gradient); color: white; border: none; }
-        .trend-gradient-bg { background: var(--trend-gradient) !important; color: white !important; }
-        .trend-gradient-bg h4, .trend-gradient-bg i { color: white !important; opacity: 0.9; }
-
-        .text-gradient {
-            background: var(--trend-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        /* Cards */
-        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; margin-bottom: 40px; }
-        .card { background: var(--card-bg); padding: 25px; border-radius: 20px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
-        .card h4 { font-size: 12px; color: var(--text-dim); text-transform: uppercase; margin-bottom: 10px; }
-        .card .value { font-size: 28px; font-weight: 900; }
-        .card i { float: left; font-size: 24px; color: var(--primary); }
-
-        /* Tables */
-        .section-content { background: white; padding: 30px; border-radius: 24px; border: 1px solid #f1f5f9; }
-        .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 10px; }
-        table { width: 100%; border-collapse: collapse; }
-        th { text-align: right; color: var(--text-dim); padding: 15px; border-bottom: 1px solid #f1f5f9; font-size: 14px; }
-        td { padding: 15px; border-bottom: 1px solid #f8fafc; }
-
-        .badge { padding: 4px 12px; border-radius: 20px; font-size: 11px; font-weight: bold; }
-        .badge-success { background: #dcfce7; color: #166534; }
-        .badge-warning { background: #fef9c3; color: #854d0e; }
-
-        /* Modal */
-        .modal {
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.5); align-items: center; justify-content: center; z-index: 1000;
-        }
-        .modal-content { background: white; padding: 30px; border-radius: 30px; width: 90%; max-width: 500px; }
-        .modal-footer { display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px; }
-        .btn { cursor: pointer; padding: 10px 20px; border-radius: 12px; font-weight: bold; transition: 0.3s; border: none; }
-        .btn-outline { border: 1px solid #e2e8f0; background: white; }
-        .action-icons i { margin: 0 5px; cursor: pointer; opacity: 0.6; transition: 0.2s; }
-        .action-icons i:hover { opacity: 1; color: var(--primary); }
-
-        .user-avatar { 
-            width: 35px; height: 35px; border-radius: 10px; 
-            background: var(--trend-gradient); color: white; 
-            display: flex; align-items: center; justify-content: center; font-weight: bold;
-        }
-        .admin-profile { display: flex; align-items: center; gap: 10px; }
-        .notifications { position: relative; margin-left: 15px; cursor: pointer; }
-        .dot { position: absolute; top: -5px; right: -5px; width: 8px; height: 8px; background: var(--primary); border-radius: 50%; }
-        .flex-row { display: flex; align-items: center; gap: 15px; }
-        
-        /* Login Overlay */
-        .login-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.8); display: flex; align-items: center; justify-content: center;
-            z-index: 2000;
-        }
-        .login-container {
-            background: white; padding: 40px; border-radius: 30px; width: 90%; max-width: 400px;
-            text-align: center;
-        }
-        .login-container input {
-            width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #e2e8f0;
-            border-radius: 12px; font-family: 'Tajawal', sans-serif;
-        }
-        .error-msg { color: #ef4444; font-size: 14px; margin-top: 10px; }
-        .logout-btn { cursor: pointer; background: none; border: none; color: #94a3b8; margin-right: 15px; font-size: 18px; }
-        .logout-btn:hover { color: var(--primary); }
+        body { font-family: 'Tajawal', sans-serif; background-color: #f9fafb; }
+        .admin-gradient { background: linear-gradient(90deg, #1A1A1A, #B8860B); }
     </style>
-    <title>لوحة التحكم | تريند للأناقة</title>
 </head>
 <body>
 
-<div id="login-overlay" class="login-overlay">
-    <div class="login-container">
-        <i class="fa-solid fa-lock text-4xl" style="color: var(--primary); margin-bottom: 20px;"></i>
-        <h2 class="brand-font mb-4">تسجيل الدخول</h2>
-        <input type="text" id="admin-username" placeholder="اسم المستخدم" autocomplete="off">
-        <input type="password" id="admin-password" placeholder="كلمة المرور">
-        <div id="login-error" class="error-msg"></div>
-        <button onclick="checkAdminLogin()" class="trend-gradient btn" style="width: 100%; margin-top: 20px;">دخول</button>
-    </div>
-</div>
-
-<div id="admin-content" style="display: none;">
-    <nav class="nav-container">
-        <div class="logo brand-font">
-            <span style="color: var(--primary);">TREND</span><br>
-            <span style="font-size: 14px; letter-spacing: 2px; color: var(--text-dim);">ELEGANCE</span>
-        </div>
-        <ul class="nav-links">
-            <li><a onclick="showSection('home')" class="active" id="link-home"><i class="fa-solid fa-chart-line"></i><span>الإحصائيات</span></a></li>
-            <li><a onclick="showSection('products')" id="link-products"><i class="fa-solid fa-shirt"></i><span>المنتجات</span></a></li>
-            <li><a onclick="showSection('orders')" id="link-orders"><i class="fa-solid fa-bag-shopping"></i><span>الطلبات</span></a></li>
-        </ul>
-    </nav>
-
-    <main>
-        <header class="top-bar">
-            <h1 class="page-title brand-font" id="page-title">الإحصائيات العامة</h1>
-            <div class="flex-row">
-                <button onclick="logout()" class="logout-btn" title="تسجيل الخروج"><i class="fa-solid fa-sign-out-alt"></i></button>
-                <div class="notifications"><i class="fa-solid fa-bell"></i><span class="dot"></span></div>
-                <div class="admin-profile">
-                    <span class="user-avatar">M</span>
-                    <span class="admin-name">مازن حسن</span>
-                </div>
+    <div id="adminLogin" class="fixed inset-0 bg-black/90 backdrop-blur-md flex items-center justify-center z-[2000]">
+        <div class="bg-white rounded-3xl p-8 w-11/12 max-w-md text-center shadow-2xl">
+            <div class="w-20 h-20 admin-gradient rounded-full flex items-center justify-center mx-auto mb-4">
+                <i class="fa-solid fa-lock text-3xl text-white"></i>
             </div>
-        </header>
-
-        <section id="home-section" class="page-section active-section">
-            <div class="stats-grid" id="stats-container">
-                <!-- Stats will load here -->
-            </div>
-            <div class="section-content">
-                <h3 class="brand-font mb-4">أحدث العمليات</h3>
-                <div class="table-responsive">
-                    <table id="orders-table-preview">
-                        <thead>
-                            <tr><th>رقم الطلب</th><th>العميل</th><th>التاريخ</th><th>الحالة</th><th>الإجمالي</th></tr>
-                        </thead>
-                        <tbody id="recent-orders-body">
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </section>
-
-        <section id="products-section" class="page-section" style="display: none;">
-            <div class="section-content">
-                <div class="section-header">
-                    <h3 class="brand-font">كتالوج المنتجات</h3>
-                    <button class="btn trend-gradient" onclick="openAddModal('product')"><i class="fa-solid fa-plus"></i> إضافة قطعة جديدة</button>
-                </div>
-                <div class="table-responsive">
-                    <table id="products-table">
-                        <thead>
-                            <tr><th>المنتج</th><th>السعر</th><th>المخزون</th><th>الفئة</th><th>المبيعات</th><th>الإجراءات</th></tr>
-                        </thead>
-                        <tbody id="products-table-body">
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </section>
-
-        <section id="orders-section" class="page-section" style="display: none;">
-            <div class="section-content">
-                <div class="section-header">
-                    <h3 class="brand-font">إدارة الطلبات</h3>
-                </div>
-                <div class="table-responsive">
-                    <table id="orders-table">
-                        <thead>
-                            <tr><th>رقم الطلب</th><th>العميل</th><th>التاريخ</th><th>الحالة</th><th>الإجمالي</th><th>الإجراءات</th></tr>
-                        </thead>
-                        <tbody id="orders-table-body">
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <div id="modal" class="modal">
-        <div class="modal-content">
-            <h3 id="modal-title" class="brand-font">إضافة</h3>
-            <form id="modal-form" onsubmit="event.preventDefault(); saveItem();">
-                <div id="modal-fields"></div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-outline" onclick="closeModal()">إلغاء</button>
-                    <button type="submit" class="btn trend-gradient" id="modal-save-btn">حفظ التغييرات</button>
-                </div>
-            </form>
+            <h2 class="text-2xl font-black mb-6">دخول المسؤول</h2>
+            <input type="text" id="adminUser" placeholder="اسم المسؤول" class="w-full border border-gray-200 rounded-xl p-4 mb-3 text-right">
+            <input type="password" id="adminPass" placeholder="كلمة المرور" class="w-full border border-gray-200 rounded-xl p-4 mb-6 text-right">
+            <button onclick="checkAdminAuth()" class="w-full admin-gradient text-white py-4 rounded-xl font-bold hover:opacity-90 transition">تسجيل الدخول</button>
+            <p id="errorMsg" class="text-red-500 mt-4 hidden">بيانات الدخول غير صحيحة!</p>
         </div>
     </div>
-</div>
 
-<script>
-    // Admin credentials
-    const ADMIN_USERNAME = "Mazin Hassan";
-    const ADMIN_PASSWORD = "panda@2025";
-    
-    // Check login status
-    function checkAdminLogin() {
-        const username = document.getElementById('admin-username').value.trim();
-        const password = document.getElementById('admin-password').value;
-        
-        if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
-            sessionStorage.setItem('adminLoggedIn', 'true');
-            document.getElementById('login-overlay').style.display = 'none';
-            document.getElementById('admin-content').style.display = 'block';
-            loadAllData();
-        } else {
-            document.getElementById('login-error').innerText = 'اسم المستخدم أو كلمة المرور غير صحيحة';
-        }
-    }
-    
-    function logout() {
-        sessionStorage.removeItem('adminLoggedIn');
-        window.location.reload();
-    }
-    
-    // Check if already logged in
-    if (sessionStorage.getItem('adminLoggedIn') === 'true') {
-        document.getElementById('login-overlay').style.display = 'none';
-        document.getElementById('admin-content').style.display = 'block';
-        loadAllData();
-    }
-    
-    // Data Management Functions
-    function loadAllData() {
-        loadStats();
-        loadProducts();
-        loadOrders();
-        loadRecentOrders();
-    }
-    
-    function loadStats() {
-        const stats = JSON.parse(localStorage.getItem('stats')) || {
-            totalSales: 45600, todayOrders: 12, newCustomers: 84, currentStock: 342
-        };
-        const statsContainer = document.getElementById('stats-container');
-        if (statsContainer) {
-            statsContainer.innerHTML = `
-                <div class="card trend-gradient-bg">
-                    <i class="fa-solid fa-coins"></i>
-                    <h4>إجمالي المبيعات</h4>
-                    <div class="value">${stats.totalSales} <small>SDG</small></div>
-                </div>
-                <div class="card">
-                    <i class="fa-solid fa-basket-shopping"></i>
-                    <h4>طلبات اليوم</h4>
-                    <div class="value text-gradient">${stats.todayOrders}</div>
-                </div>
-                <div class="card">
-                    <i class="fa-solid fa-user-plus"></i>
-                    <h4>عملاء جدد</h4>
-                    <div class="value">${stats.newCustomers}</div>
-                </div>
-                <div class="card">
-                    <i class="fa-solid fa-warehouse"></i>
-                    <h4>المخزون الحالي</h4>
-                    <div class="value">${stats.currentStock}</div>
-                </div>
-            `;
-        }
-    }
-    
-    function loadProducts() {
-        const products = JSON.parse(localStorage.getItem('products')) || [];
-        const tbody = document.getElementById('products-table-body');
-        if (tbody) {
-            tbody.innerHTML = products.map(product => `
-                <tr>
-                    <td>${product.name}</td>
-                    <td>${product.price} SDG</td>
-                    <td>${product.stock}</td>
-                    <td>${product.category}</td>
-                    <td>${product.sales}</td>
-                    <td><div class="action-icons">
-                        <i class="fa-solid fa-pen" onclick="openEditModal('product', ${product.id})"></i>
-                        <i class="fa-solid fa-trash" onclick="deleteProduct(${product.id})"></i>
-                    </div></td>
-                </tr>
-            `).join('');
-        }
-    }
-    
-    function loadOrders() {
-        const orders = JSON.parse(localStorage.getItem('orders')) || [];
-        const tbody = document.getElementById('orders-table-body');
-        if (tbody) {
-            tbody.innerHTML = orders.map(order => `
-                <tr>
-                    <td>${order.id}</td>
-                    <td>${order.customer}</td>
-                    <td>${order.date}</td>
-                    <td><span class="badge ${order.status === 'مكتمل' ? 'badge-success' : 'badge-warning'}">${order.status}</span></td>
-                    <td>${order.total} SDG</td>
-                    <td><div class="action-icons">
-                        <i class="fa-solid fa-pen" onclick="editOrder('${order.id}')"></i>
-                    </div></td>
-                </tr>
-            `).join('');
-        }
-    }
-    
-    function loadRecentOrders() {
-        const orders = JSON.parse(localStorage.getItem('orders')) || [];
-        const recent = orders.slice(0, 3);
-        const tbody = document.getElementById('recent-orders-body');
-        if (tbody) {
-            tbody.innerHTML = recent.map(order => `
-                <tr>
-                    <td>${order.id}</td>
-                    <td>${order.customer}</td>
-                    <td>${order.date}</td>
-                    <td><span class="badge ${order.status === 'مكتمل' ? 'badge-success' : 'badge-warning'}">${order.status}</span></td>
-                    <td>${order.total} SDG</td>
-                </tr>
-            `).join('');
-        }
-    }
-    
-    function editOrder(orderId) {
-        const orders = JSON.parse(localStorage.getItem('orders')) || [];
-        const order = orders.find(o => o.id === orderId);
-        if (order) {
-            const newStatus = order.status === 'مكتمل' ? 'قيد التجهيز' : 'مكتمل';
-            order.status = newStatus;
-            localStorage.setItem('orders', JSON.stringify(orders));
-            loadOrders();
-            loadRecentOrders();
-            // تحديث الإحصائيات إذا لزم الأمر (مثلاً عدد الطلبات)
-        }
-    }
-    
-    function deleteProduct(productId) {
-        if (confirm('هل أنت متأكد من حذف هذا المنتج؟')) {
-            let products = JSON.parse(localStorage.getItem('products')) || [];
-            products = products.filter(p => p.id !== productId);
-            localStorage.setItem('products', JSON.stringify(products));
-            // تحديث المخزون في الإحصائيات
-            const stats = JSON.parse(localStorage.getItem('stats')) || {};
-            const totalStock = products.reduce((sum, p) => sum + p.stock, 0);
-            stats.currentStock = totalStock;
-            localStorage.setItem('stats', JSON.stringify(stats));
-            loadProducts();
-            loadStats();
-        }
-    }
-    
-    let currentEditId = null;
-    let currentEditType = null;
-    
-    function openAddModal(type) {
-        currentEditType = type;
-        currentEditId = null;
-        document.getElementById('modal-title').innerText = 'إضافة منتج جديد';
-        const fieldsDiv = document.getElementById('modal-fields');
-        fieldsDiv.innerHTML = `
-            <div style="margin-bottom: 15px;">
-                <label>اسم المنتج</label>
-                <input type="text" id="prod-name" style="width:100%; padding:8px; margin-top:5px; border:1px solid #ddd; border-radius:8px;">
+    <div id="adminDashboard" class="hidden">
+        <nav class="bg-white border-b p-4 sticky top-0 z-50">
+            <div class="max-w-7xl mx-auto flex justify-between items-center">
+                <h1 class="text-xl font-black"><i class="fa-solid fa-gears ml-2"></i>لوحة إدارة المنتجات</h1>
+                <button onclick="location.reload()" class="text-gray-500"><i class="fa-solid fa-right-from-bracket"></i></button>
             </div>
-            <div style="margin-bottom: 15px;">
-                <label>السعر (SDG)</label>
-                <input type="number" id="prod-price" style="width:100%; padding:8px; margin-top:5px; border:1px solid #ddd; border-radius:8px;">
+        </nav>
+
+        <main class="max-w-4xl mx-auto p-6">
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 mb-8">
+                <h3 class="font-bold text-lg mb-4 text-gradient">إضافة قطعة جديدة للمتجر</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <input type="text" id="pName" placeholder="اسم المنتج (مثلاً: قميص تركي)" class="border rounded-xl p-3 bg-gray-50">
+                    <input type="number" id="pPrice" placeholder="السعر (ج.س)" class="border rounded-xl p-3 bg-gray-50">
+                    <select id="pCat" class="border rounded-xl p-3 bg-gray-50">
+                        <option>ملابس</option><option>أحذية</option><option>إكسسوارات</option>
+                    </select>
+                    <input type="text" id="pImage" placeholder="رابط صورة المنتج" class="border rounded-xl p-3 bg-gray-50">
+                </div>
+                <button onclick="addNewProduct()" class="mt-4 w-full admin-gradient text-white py-3 rounded-xl font-bold">نشر المنتج في المتجر</button>
             </div>
-            <div style="margin-bottom: 15px;">
-                <label>المخزون</label>
-                <input type="number" id="prod-stock" style="width:100%; padding:8px; margin-top:5px; border:1px solid #ddd; border-radius:8px;">
+
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                <table class="w-full text-right text-sm">
+                    <thead class="bg-gray-50 border-b">
+                        <tr>
+                            <th class="p-4">المنتج</th>
+                            <th>السعر</th>
+                            <th>الفئة</th>
+                            <th class="text-center">إجراء</th>
+                        </tr>
+                    </thead>
+                    <tbody id="productsTable"></tbody>
+                </table>
             </div>
-            <div style="margin-bottom: 15px;">
-                <label>الفئة</label>
-                <input type="text" id="prod-category" style="width:100%; padding:8px; margin-top:5px; border:1px solid #ddd; border-radius:8px;">
-            </div>
-            <div style="margin-bottom: 15px;">
-                <label>رابط الصورة (اختياري)</label>
-                <input type="text" id="prod-image" style="width:100%; padding:8px; margin-top:5px; border:1px solid #ddd; border-radius:8px;" placeholder="https://...">
-            </div>
-        `;
-        document.getElementById('modal').style.display = 'flex';
-    }
-    
-    function openEditModal(type, id) {
-        currentEditType = type;
-        currentEditId = id;
-        const products = JSON.parse(localStorage.getItem('products')) || [];
-        const product = products.find(p => p.id === id);
-        if (product) {
-            document.getElementById('modal-title').innerText = 'تعديل المنتج';
-            const fieldsDiv = document.getElementById('modal-fields');
-            fieldsDiv.innerHTML = `
-                <div style="margin-bottom: 15px;">
-                    <label>اسم المنتج</label>
-                    <input type="text" id="prod-name" value="${product.name}" style="width:100%; padding:8px; margin-top:5px; border:1px solid #ddd; border-radius:8px;">
-                </div>
-                <div style="margin-bottom: 15px;">
-                    <label>السعر (SDG)</label>
-                    <input type="number" id="prod-price" value="${product.price}" style="width:100%; padding:8px; margin-top:5px; border:1px solid #ddd; border-radius:8px;">
-                </div>
-                <div style="margin-bottom: 15px;">
-                    <label>المخزون</label>
-                    <input type="number" id="prod-stock" value="${product.stock}" style="width:100%; padding:8px; margin-top:5px; border:1px solid #ddd; border-radius:8px;">
-                </div>
-                <div style="margin-bottom: 15px;">
-                    <label>الفئة</label>
-                    <input type="text" id="prod-category" value="${product.category}" style="width:100%; padding:8px; margin-top:5px; border:1px solid #ddd; border-radius:8px;">
-                </div>
-                <div style="margin-bottom: 15px;">
-                    <label>رابط الصورة</label>
-                    <input type="text" id="prod-image" value="${product.image || ''}" style="width:100%; padding:8px; margin-top:5px; border:1px solid #ddd; border-radius:8px;">
-                </div>
-            `;
-            document.getElementById('modal').style.display = 'flex';
-        }
-    }
-    
-    function saveItem() {
-        if (currentEditType === 'product') {
-            const name = document.getElementById('prod-name').value;
-            const price = parseInt(document.getElementById('prod-price').value);
-            const stock = parseInt(document.getElementById('prod-stock').value);
-            const category = document.getElementById('prod-category').value;
-            const image = document.getElementById('prod-image').value || 'https://picsum.photos/id/1/300/400';
-            
-            let products = JSON.parse(localStorage.getItem('products')) || [];
-            
-            if (currentEditId) {
-                // Update existing
-                const index = products.findIndex(p => p.id === currentEditId);
-                if (index !== -1) {
-                    products[index] = { ...products[index], name, price, stock, category, image };
-                }
+        </main>
+    </div>
+
+    <script>
+        const AUTH = { user: "Mazin Hassan", pass: "panda@2025" };
+        let products = JSON.parse(localStorage.getItem('products_trend')) || [];
+
+        function checkAdminAuth() {
+            const u = document.getElementById('adminUser').value;
+            const p = document.getElementById('adminPass').value;
+            if(u === AUTH.user && p === AUTH.pass) {
+                document.getElementById('adminLogin').classList.add('hidden');
+                document.getElementById('adminDashboard').classList.remove('hidden');
+                renderTable();
             } else {
-                // Add new
-                const newId = products.length > 0 ? Math.max(...products.map(p => p.id)) + 1 : 1;
-                products.push({
-                    id: newId,
-                    name, price, stock, category,
-                    sales: 0,
-                    image: image
-                });
+                document.getElementById('errorMsg').classList.remove('hidden');
             }
-            
-            localStorage.setItem('products', JSON.stringify(products));
-            
-            // تحديث المخزون الكلي في الإحصائيات
-            const stats = JSON.parse(localStorage.getItem('stats')) || {};
-            const totalStock = products.reduce((sum, p) => sum + p.stock, 0);
-            stats.currentStock = totalStock;
-            localStorage.setItem('stats', JSON.stringify(stats));
-            
-            loadProducts();
-            loadStats();
         }
-        closeModal();
-    }
-    
-    function closeModal() {
-        document.getElementById('modal').style.display = 'none';
-    }
-    
-    function showSection(section) {
-        const sections = ['home', 'products', 'orders'];
-        sections.forEach(s => {
-            const el = document.getElementById(`${s}-section`);
-            if (el) el.style.display = 'none';
-        });
-        document.getElementById(`${section}-section`).style.display = 'block';
-        
-        // Update active link
-        const links = document.querySelectorAll('.nav-links a');
-        links.forEach(link => link.classList.remove('active'));
-        document.getElementById(`link-${section}`).classList.add('active');
-        
-        const titles = {
-            home: 'الإحصائيات العامة',
-            products: 'إدارة المنتجات',
-            orders: 'إدارة الطلبات'
-        };
-        document.getElementById('page-title').innerText = titles[section];
-    }
-    
-    // مزامنة فورية: الاستماع لأي تغيير في localStorage من أي تبويب آخر
-    window.addEventListener('storage', function(event) {
-        if (event.key === 'products') {
-            loadProducts();
-            loadStats();      // لأن المخزون قد يتغير
-        } else if (event.key === 'orders') {
-            loadOrders();
-            loadRecentOrders();
-        } else if (event.key === 'stats') {
-            loadStats();
+
+        function renderTable() {
+            const tbody = document.getElementById('productsTable');
+            tbody.innerHTML = products.map(p => `
+                <tr class="border-b hover:bg-gray-50">
+                    <td class="p-4">
+                        <div class="flex items-center gap-3">
+                            <img src="${p.image}" class="w-10 h-10 rounded shadow-sm object-cover">
+                            <span class="font-bold">${p.name}</span>
+                        </div>
+                    </td>
+                    <td class="font-bold">${p.price.toLocaleString()} ج.س</td>
+                    <td><span class="bg-gray-100 px-2 py-1 rounded text-xs">${p.category}</span></td>
+                    <td class="text-center">
+                        <button onclick="deleteProduct(${p.id})" class="text-red-500 hover:text-red-700 p-2">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </button>
+                    </td>
+                </tr>
+            `).join('');
         }
-    });
-    
-    // Make functions global
-    window.checkAdminLogin = checkAdminLogin;
-    window.logout = logout;
-    window.showSection = showSection;
-    window.openAddModal = openAddModal;
-    window.openEditModal = openEditModal;
-    window.deleteProduct = deleteProduct;
-    window.saveItem = saveItem;
-    window.closeModal = closeModal;
-    window.editOrder = editOrder;
-</script>
+
+        function addNewProduct() {
+            const name = document.getElementById('pName').value;
+            const price = parseInt(document.getElementById('pPrice').value);
+            const category = document.getElementById('pCat').value;
+            const image = document.getElementById('pImage').value || 'https://via.placeholder.com/400';
+
+            if(!name || !price) return alert("يرجى ملء البيانات الأساسية");
+
+            const newProd = { id: Date.now(), name, price, category, image };
+            products.push(newProd);
+            localStorage.setItem('products_trend', JSON.stringify(products));
+            renderTable();
+            alert("تمت إضافة المنتج بنجاح!");
+            
+            // مسح الحقول
+            document.getElementById('pName').value = '';
+            document.getElementById('pPrice').value = '';
+        }
+
+        function deleteProduct(id) {
+            if(confirm("هل أنت متأكد من حذف هذا المنتج؟")) {
+                products = products.filter(p => p.id !== id);
+                localStorage.setItem('products_trend', JSON.stringify(products));
+                renderTable();
+            }
+        }
+    </script>
 </body>
-    </html>
+</html>
