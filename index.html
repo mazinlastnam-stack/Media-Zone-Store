@@ -9,13 +9,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --gold: #D4AF37;
+            --primary: #349FFF;
+            --secondary: #1D77C8;
             --black: #1A1A1A;
-            --gray-light: #F5F5F5;
-            --accent: #B8860B;
         }
         * { font-family: 'Tajawal', sans-serif; scroll-behavior: smooth; }
-        .trend-gradient { background: linear-gradient(90deg, var(--black), var(--accent)); }
+        .trend-gradient { background: linear-gradient(90deg, var(--primary), var(--secondary)); }
         .cart-sidebar {
             position: fixed; top: 0; left: 0; width: 100%; max-width: 380px; height: 100%;
             background: white; z-index: 1100; transform: translateX(-100%);
@@ -26,12 +25,11 @@
         .overlay-dark { position: fixed; inset: 0; background: rgba(0,0,0,0.5); backdrop-filter: blur(3px); z-index: 1050; display: none; }
         .overlay-dark.show { display: block; }
         .toast {
-            position: fixed; bottom: 20px; left: 20px; background: #323232; color: white;
-            padding: 12px 24px; border-radius: 40px; z-index: 2000; opacity: 0;
-            transition: 0.2s; pointer-events: none;
+            position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); 
+            background: #323232; color: white; padding: 12px 24px; border-radius: 40px; 
+            z-index: 2000; opacity: 0; transition: 0.3s; pointer-events: none;
         }
         .toast.show { opacity: 1; }
-        input, select, button { outline: none; }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
@@ -39,16 +37,16 @@
     <nav class="bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b border-gray-100 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
             <div class="flex items-center gap-2 cursor-pointer" onclick="navigate('home')">
-                <i class="fa-solid fa-shirt text-2xl" style="color: var(--black);"></i>
+                <i class="fa-solid fa-shirt text-2xl" style="color: var(--primary);"></i>
                 <h1 class="text-2xl font-black" style="color: var(--black);">ترند الأناقة</h1>
             </div>
             <div class="flex items-center gap-4">
                 <div class="relative cursor-pointer" onclick="toggleCart()">
-                    <i class="fa-solid fa-bag-shopping text-xl" style="color: var(--black);"></i>
-                    <span id="cartBadge" class="absolute -top-2 -right-2 bg-black text-white text-xs rounded-full w-5 h-5 flex items-center justify-center hidden">0</span>
+                    <i class="fa-solid fa-bag-shopping text-xl text-gray-700"></i>
+                    <span id="cartBadge" class="absolute -top-2 -right-2 bg-blue-500 text-white text-[10px] rounded-full w-5 h-5 flex items-center justify-center hidden">0</span>
                 </div>
                 <div class="cursor-pointer" onclick="logout()">
-                    <i class="fa-solid fa-sign-out-alt text-gray-500"></i>
+                    <i class="fa-solid fa-sign-out-alt text-gray-400"></i>
                 </div>
             </div>
         </div>
@@ -58,99 +56,96 @@
 
     <div id="cartSidebar" class="cart-sidebar flex flex-col">
         <div class="p-5 border-b flex justify-between items-center">
-            <h2 class="text-xl font-black" style="color: var(--black);">سلة التسوق</h2>
+            <h2 class="text-xl font-black">سلة التسوق</h2>
             <i class="fa-solid fa-xmark text-2xl cursor-pointer hover:text-red-500" onclick="toggleCart()"></i>
         </div>
-        <div id="cartItemsList" class="flex-1 overflow-y-auto p-4 space-y-3"></div>
+        <div id="cartItemsList" class="flex-1 overflow-y-auto p-4 space-y-3 text-right"></div>
         <div class="p-5 border-t bg-gray-50">
             <div class="flex justify-between items-center font-bold text-lg mb-4">
                 <span>الإجمالي</span>
-                <span id="cartTotalAmount" class="text-black">0 ج.س</span>
+                <span id="cartTotalAmount">0 ج.س</span>
             </div>
-            <button onclick="checkout()" class="w-full trend-gradient text-white py-3 rounded-xl font-bold transition hover:scale-[0.98]">إتمام الطلب عبر واتساب</button>
+            <button onclick="checkout()" class="w-full trend-gradient text-white py-4 rounded-2xl font-bold shadow-lg shadow-blue-200 transition active:scale-95">إتمام الطلب (واتساب)</button>
         </div>
     </div>
+    
     <div id="overlay" class="overlay-dark" onclick="toggleCart()"></div>
-
     <div id="toast" class="toast"></div>
 
     <div id="loginModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-[1200]">
-        <div class="bg-white rounded-2xl p-6 w-11/12 max-w-md text-center">
-            <i class="fa-solid fa-user-tie text-5xl mb-3" style="color: var(--black);"></i>
-            <h2 class="text-2xl font-black mb-4" style="color: var(--black);">مرحباً بك</h2>
-            <input type="text" id="loginUsername" placeholder="اسم المستخدم" class="w-full border border-gray-200 rounded-xl p-3 mb-3 text-right">
-            <input type="password" id="loginPassword" placeholder="كلمة المرور" class="w-full border border-gray-200 rounded-xl p-3 mb-4 text-right">
-            <button onclick="handleLogin()" class="w-full bg-black text-white py-3 rounded-xl font-bold hover:bg-gray-800 transition">دخول</button>
-     
-     
+        <div class="bg-white rounded-3xl p-8 w-11/12 max-w-md text-center shadow-2xl">
+            <div class="w-20 h-20 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-4">
+                <i class="fa-solid fa-user-tie text-4xl text-blue-500"></i>
+            </div>
+            <h2 class="text-2xl font-black mb-2">مرحباً بك في ترند</h2>
+            <p class="text-gray-500 mb-6 text-sm">سجل دخولك لبدء التسوق</p>
+            <input type="text" id="loginUsername" placeholder="اسمك الكريم" class="w-full border border-gray-100 bg-gray-50 rounded-xl p-4 mb-3 text-right focus:ring-2 focus:ring-blue-400 outline-none">
+            <button onclick="handleLogin()" class="w-full trend-gradient text-white py-4 rounded-xl font-bold shadow-lg shadow-blue-100 transition hover:opacity-90">دخول للمتجر</button>
         </div>
     </div>
 
     <script>
         // ---------- CONFIG ----------
-        const WHATSAPP_NUMBER = '249115169965';
+        const WHATSAPP_NUMBER = '249121479594'; 
 
-        // ---------- GLOBAL STATE ----------
+        // ---------- STATE ----------
         let currentUser = null;   
         let products = [];
         let cart = [];
-        let orders = [];
 
         function showToast(msg, isError = false) {
             const toast = document.getElementById('toast');
             toast.textContent = msg;
-            toast.style.background = isError ? '#e53e3e' : '#1A1A1A';
+            toast.style.background = isError ? '#ef4444' : '#1A1A1A';
             toast.classList.add('show');
             setTimeout(() => toast.classList.remove('show'), 3000);
         }
 
-        // ---------- DATA PERSISTENCE ----------
+        // ---------- DATA ----------
         function loadData() {
             const storedProducts = localStorage.getItem('products_trend');
-            if (storedProducts) products = JSON.parse(storedProducts);
-            else {
+            if (storedProducts) {
+                products = JSON.parse(storedProducts);
+            } else {
                 products = [
-                    { id: 1, name: 'قميص أبيض كلاسيك', price: 15000, category: 'ملابس', image: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400' },
-                    { id: 2, name: 'بنطال جينز أزرق', price: 22000, category: 'ملابس', image: 'https://images.unsplash.com/photo-1542272604-787c3835535d?w=400' },
-                    { id: 3, name: 'حذاء رياضي نايس', price: 35000, category: 'أحذية', image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400' },
-                    { id: 4, name: 'ساعة يد فاخرة', price: 45000, category: 'إكسسوارات', image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400' }
+                    { id: 101, name: 'ساعة YILEIQI كلاسيك (جلد)', price: 40000, category: 'ساعات', image: 'https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=400' },
+                    { id: 102, name: 'ساعة WEIDI (مقاومة للماء)', price: 40000, category: 'ساعات', image: 'https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?w=400' },
+                    { id: 103, name: 'ساعة Casio (قفل فراشة)', price: 40000, category: 'ساعات', image: 'https://images.unsplash.com/photo-1542496658-e33a6d0d50f6?w=400' }
                 ];
                 localStorage.setItem('products_trend', JSON.stringify(products));
             }
-            const storedOrders = localStorage.getItem('orders_trend');
-            orders = storedOrders ? JSON.parse(storedOrders) : [];
         }
 
-        function saveOrders() { localStorage.setItem('orders_trend', JSON.stringify(orders)); }
-
-        // ---------- CART ----------
+        // ---------- UI ----------
         function updateCartUI() {
             const container = document.getElementById('cartItemsList');
             const totalSpan = document.getElementById('cartTotalAmount');
             const badge = document.getElementById('cartBadge');
             let total = 0;
             let itemCount = 0;
-            if (!cart.length) {
-                container.innerHTML = `<div class="text-center py-10 text-gray-400"><p>السلة فارغة</p></div>`;
+
+            if (cart.length === 0) {
+                container.innerHTML = `<div class="text-center py-10 text-gray-400"><i class="fa-solid fa-cart-shopping text-4xl mb-3 opacity-20"></i><p>السلة فارغة</p></div>`;
                 badge.classList.add('hidden');
             } else {
-                container.innerHTML = cart.map((item) => {
+                container.innerHTML = cart.map(item => {
                     const p = products.find(prod => prod.id === item.id);
+                    if(!p) return '';
                     total += p.price * item.qty;
                     itemCount += item.qty;
                     return `
-                        <div class="flex gap-3 bg-gray-50 p-3 rounded-xl border">
-                            <div class="w-16 h-16 rounded-lg bg-cover bg-center" style="background-image: url('${p.image}')"></div>
+                        <div class="flex gap-4 bg-white p-3 rounded-2xl border border-gray-100 shadow-sm">
+                            <div class="w-20 h-20 rounded-xl bg-cover bg-center" style="background-image: url('${p.image}')"></div>
                             <div class="flex-1">
-                                <h4 class="font-bold">${p.name}</h4>
-                                <p class="text-sm font-bold text-gray-600">${p.price.toLocaleString()} ج.س</p>
-                                <div class="flex justify-between items-center mt-2">
-                                    <div class="flex items-center gap-2 bg-white px-2 py-1 rounded-lg border">
-                                        <button onclick="updateCartQty(${p.id}, -1)">-</button>
-                                        <span class="text-sm font-bold">${item.qty}</span>
-                                        <button onclick="updateCartQty(${p.id}, 1)">+</button>
+                                <h4 class="font-bold text-sm">${p.name}</h4>
+                                <p class="text-blue-500 font-bold text-xs mt-1">${p.price.toLocaleString()} ج.س</p>
+                                <div class="flex justify-between items-center mt-3">
+                                    <div class="flex items-center gap-3 bg-gray-50 px-3 py-1 rounded-lg border">
+                                        <button onclick="updateCartQty(${p.id}, -1)" class="font-bold">-</button>
+                                        <span class="text-xs font-bold">${item.qty}</span>
+                                        <button onclick="updateCartQty(${p.id}, 1)" class="font-bold">+</button>
                                     </div>
-                                    <button onclick="removeFromCart(${p.id})" class="text-red-400"><i class="fa-solid fa-trash-can"></i></button>
+                                    <button onclick="removeFromCart(${p.id})" class="text-red-400 text-sm"><i class="fa-solid fa-trash"></i></button>
                                 </div>
                             </div>
                         </div>`;
@@ -159,6 +154,7 @@
                 badge.classList.remove('hidden');
             }
             totalSpan.innerText = total.toLocaleString() + ' ج.س';
+            localStorage.setItem('cart_trend', JSON.stringify(cart));
         }
 
         function addToCart(productId) {
@@ -167,7 +163,6 @@
             else cart.push({ id: productId, qty: 1 });
             updateCartUI();
             showToast('تمت الإضافة للسلة');
-            toggleCart(true);
         }
 
         function updateCartQty(id, delta) {
@@ -178,38 +173,44 @@
                 updateCartUI();
             }
         }
+
         function removeFromCart(id) { cart = cart.filter(i => i.id !== id); updateCartUI(); }
 
-        // ---------- WHATSAPP CHECKOUT ----------
+        // ---------- CHECKOUT ----------
         function checkout() {
             if (!currentUser) return;
             if (cart.length === 0) return showToast('السلة فارغة', true);
             
+            const phone2 = prompt("الرجاء إدخال رقم هاتف احتياطي (اختياري):") || "لا يوجد";
+            const address = prompt("الرجاء إدخال مكان الاستلام بالتفصيل (أمدرمان أو الولاية):");
+            
+            if (!address) return showToast('يجب إدخال عنوان الاستلام', true);
+
             let total = 0;
             let itemsText = "";
             cart.forEach(item => {
                 const p = products.find(pr => pr.id === item.id);
-                total += p.price * item.qty;
-                itemsText += `- ${p.name} (عدد ${item.qty}) = ${p.price * item.qty} ج.س\n`;
+                if(p) {
+                    total += p.price * item.qty;
+                    itemsText += `• *${p.name}* (الكمية: ${item.qty})\n`;
+                }
             });
 
-            // إنشاء رسالة الواتساب
-            const message = `🛍️ *طلب جديد من متجر ترند الأناقة*\n\n` +
-                            `👤 *اسم العميل:* ${currentUser.username}\n` +
-                            `📦 *الطلبات:*\n${itemsText}\n` +
-                            `💰 *الإجمالي:* ${total.toLocaleString()} ج.س\n\n` +
-                            `يرجى تأكيد الطلب وتجهيزه.`;
+            const message = `🛍️ *طلب جديد من متجر ترند الأناقة*\n` +
+                            `--------------------------\n` +
+                            `👤 *بيانات العميل:*\n` +
+                            `- الاسم: ${currentUser.username}\n` +
+                            `- الرقم 2: ${phone2}\n` +
+                            `- مكان الاستلام: ${address}\n\n` +
+                            `📦 *المنتجات:*\n${itemsText}\n` +
+                            `💰 *الإجمالي:* ${total.toLocaleString()} ج.س\n` +
+                            `--------------------------\n` +
+                            `يرجى تأكيد الطلب وتجهيز الشحن.`;
 
-            const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+            const waUrl = `https://api.whatsapp.com/send?phone=${WHATSAPP_NUMBER}&text=${encodeURIComponent(message)}`;
             
-            // تسجيل محلي للطلب
-            orders.push({ user: currentUser.username, date: new Date().toLocaleString(), total, items: [...cart] });
-            saveOrders();
-
-            // فتح واتساب
-            window.open(waUrl, '_blank');
+            window.location.href = waUrl; 
             
-            // تفريغ السلة
             cart = [];
             updateCartUI();
             toggleCart(false);
@@ -218,29 +219,33 @@
         function renderHome() {
             const app = document.getElementById('app');
             app.innerHTML = `
-                <div class="mb-8 text-center py-6 bg-black text-white rounded-3xl">
-                    <h2 class="text-3xl font-black">ترند الأناقة 2026</h2>
-                    <p class="text-gray-400 mt-2">عبر عن شخصيتك بأرقى الأزياء</p>
+                <div class="mb-10 text-center py-12 rounded-[40px] relative overflow-hidden shadow-2xl shadow-blue-100" 
+                     style="background: linear-gradient(135deg, #349FFF, #1D77C8);">
+                    <div class="absolute -top-10 -right-10 opacity-10 rotate-12"><i class="fa-solid fa-shirt text-[200px] text-white"></i></div>
+                    <div class="relative z-10">
+                        <h2 class="text-4xl font-black text-white mb-2">ترند الأناقة 2026</h2>
+                        <p class="text-blue-50 font-medium italic">تشكيلة الساعات الفاخرة وصلت الآن</p>
+                    </div>
                 </div>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
                     ${products.map(p => `
-                        <div class="bg-white rounded-2xl shadow-sm overflow-hidden group border border-gray-100">
-                            <div class="h-48 bg-cover bg-center" style="background-image: url('${p.image}')"></div>
-                            <div class="p-4">
-                                <h3 class="font-bold text-sm">${p.name}</h3>
-                                <p class="text-black font-black mt-1">${p.price.toLocaleString()} ج.س</p>
-                                <button onclick="addToCart(${p.id})" class="mt-3 w-full border-2 border-black py-2 rounded-xl text-xs font-bold hover:bg-black hover:text-white transition">أضف للحقيبة</button>
+                        <div class="bg-white rounded-[30px] shadow-sm overflow-hidden group border border-gray-100 flex flex-col h-full hover:shadow-xl transition-all duration-300">
+                            <div class="h-56 bg-cover bg-center group-hover:scale-105 transition-transform duration-500" style="background-image: url('${p.image}')"></div>
+                            <div class="p-5 flex-1 flex flex-col text-right">
+                                <span class="text-[10px] bg-blue-50 text-blue-500 font-bold px-3 py-1 rounded-full w-fit mb-2">${p.category}</span>
+                                <h3 class="font-bold text-sm h-10 mb-2 leading-tight">${p.name}</h3>
+                                <div class="mt-auto">
+                                    <p class="text-black font-black text-lg">${p.price.toLocaleString()} <span class="text-xs">ج.س</span></p>
+                                    <button onclick="addToCart(${p.id})" class="mt-4 w-full bg-gray-900 text-white py-3 rounded-2xl text-xs font-bold hover:bg-blue-600 transition-colors">أضف للسلة</button>
+                                </div>
                             </div>
                         </div>
                     `).join('')}
                 </div>`;
         }
-        
-        
 
-        function navigate(page) {
-            if (page === 'home') renderHome();
-        }
+        function navigate(page) { if (page === 'home') renderHome(); }
 
         function toggleCart(open = null) {
             const sidebar = document.getElementById('cartSidebar');
@@ -254,14 +259,21 @@
             const username = document.getElementById('loginUsername').value.trim();
             if (username) {
                 currentUser = { username };
-                document.getElementById('loginModal').style.display = 'none';
+                document.getElementById('loginModal').style.opacity = '0';
+                setTimeout(() => document.getElementById('loginModal').style.display = 'none', 300);
                 renderHome();
+            } else {
+                showToast('لطفاً أخبرنا باسمك', true);
             }
         }
 
-        function logout() { currentUser = null; document.getElementById('loginModal').style.display = 'flex'; }
+        function logout() { location.reload(); }
 
+        // Initialize
         loadData();
+        const savedCart = localStorage.getItem('cart_trend');
+        if (savedCart) cart = JSON.parse(savedCart);
+        updateCartUI();
         renderHome();
     </script>
 </body>
